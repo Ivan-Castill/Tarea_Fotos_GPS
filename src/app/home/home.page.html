@@ -1,20 +1,62 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>
-      Blank
-    </ion-title>
+    <ion-title>Galería con Ubicación</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content class="ion-padding">
 
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
-  </div>
+  <!-- 📸 Lista de fotos -->
+  <ion-card *ngFor="let photo of photoService.photos">
+    <ion-img [src]="photo.webviewPath"></ion-img>
+
+    <ion-card-content>
+      <p *ngIf="photo.latitude && photo.longitude">
+        📍 <strong>Ubicación:</strong><br>
+        <a 
+          [href]="'https://www.google.com/maps?q=' + photo.latitude + ',' + photo.longitude" 
+          target="_blank">
+          Ver en Google Maps
+        </a>
+      </p>
+    </ion-card-content>
+  </ion-card>
+
+  <!-- 🧭 Coordenadas en tiempo real -->
+  <ion-card *ngIf="latitude() !== null && longitude() !== null">
+    <ion-card-header>
+      <ion-card-title>Ubicación actual</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <p><strong>Latitud:</strong> {{ latitude() }}</p>
+      <p><strong>Longitud:</strong> {{ longitude() }}</p>
+      <p>
+        <a 
+          [href]="'https://www.google.com/maps?q=' + latitude() + ',' + longitude()" 
+          target="_blank">
+          Ver en Google Maps
+        </a>
+      </p>
+    </ion-card-content>
+  </ion-card>
+
+  <p *ngIf="errorMsg()" class="ion-padding error">{{ errorMsg() }}</p>
+
+  <!-- 📷 Botón flotante -->
+  <ion-fab vertical="bottom" horizontal="center" slot="fixed">
+    <ion-fab-button color="primary" (click)="addPhotoToGallery()">
+      <ion-icon name="camera-outline"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+
+  <p *ngIf="errorMsg()" class="ion-padding error">{{ errorMsg() }}</p>
+
+  <!-- 📷 Botón flotante -->
+  <ion-fab vertical="bottom" horizontal="center" slot="fixed">
+    <ion-fab-button color="primary" (click)="addPhotoToGallery()">
+      <ion-icon name="camera-outline"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
 </ion-content>
