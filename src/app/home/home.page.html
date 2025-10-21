@@ -6,7 +6,7 @@
 
 <ion-content class="ion-padding">
 
-  <!-- 📸 Lista de fotos -->
+  <!--Lista de fotos -->
   <ion-card *ngFor="let photo of photoService.photos">
     <ion-img [src]="photo.webviewPath"></ion-img>
 
@@ -22,7 +22,7 @@
     </ion-card-content>
   </ion-card>
 
-  <!-- 🧭 Coordenadas en tiempo real -->
+  <!--Coordenadas en tiempo real -->
   <ion-card *ngIf="latitude() !== null && longitude() !== null">
     <ion-card-header>
       <ion-card-title>Ubicación actual</ion-card-title>
@@ -42,17 +42,7 @@
 
   <p *ngIf="errorMsg()" class="ion-padding error">{{ errorMsg() }}</p>
 
-  <!-- 📷 Botón flotante -->
-  <ion-fab vertical="bottom" horizontal="center" slot="fixed">
-    <ion-fab-button color="primary" (click)="addPhotoToGallery()">
-      <ion-icon name="camera-outline"></ion-icon>
-    </ion-fab-button>
-  </ion-fab>
-
-
-  <p *ngIf="errorMsg()" class="ion-padding error">{{ errorMsg() }}</p>
-
-  <!-- 📷 Botón flotante -->
+  <!--  Botón flotante -->
   <ion-fab vertical="bottom" horizontal="center" slot="fixed">
     <ion-fab-button color="primary" (click)="addPhotoToGallery()">
       <ion-icon name="camera-outline"></ion-icon>
