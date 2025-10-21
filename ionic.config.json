@@ -1,0 +1,7 @@
+{
+  "name": "Fotos_GPS",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
